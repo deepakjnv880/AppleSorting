@@ -1,35 +1,50 @@
 import red_green
-import small_big
+import size_sorting
+import cv2
+from PIL import Image
+import numpy as np
+# import CNN_test
 
-#HOW TO GET THE FILENAME FROM CAMERA?
-filename=""
+filename="./try.jpg"
+
+im = cv2.imread(filename)
+im = cv2.resize(im, (500,500))
+im=Image.fromarray((im).astype(np.uint8))
+im.save("try.jpg")
 
 is_red=False
 is_big=False
+# is_good=False
 Angle=-1
 
-color_of_apple = getcolor(filename)
+
+# COLOR
+color_of_apple = red_green.getcolor(filename)
 if(color_of_apple == "RED"):
 	is_red=True
-else:
-	is_red=False
 
-size_of_apple = getsize(filename)
-if(size_of_apple == "BIG")
+# SIZE
+size_of_apple = size_sorting.getsize(filename)
+if(size_of_apple == "BIG"):
 	is_big=True
-else:
-	is_big=False
 
-if(is_red and is_small):
+# # QUALITY
+# quality_of_apple = CNN_test.quality(filename)
+# if(quality_of_apple=="GOOD"):
+# 	is_good=True
+
+# WRITE 8 combinations and angle accordingly
+
+if(is_red and is_big==False):
 	Angle = 0
 
 if(is_red and is_big):
-	Angle = 25
+	Angle = 15
 
-if(is_green and is_small):
-	Angle = 50
+if(is_red==False and is_big==False):
+	Angle = 30
 
-if(is_green and is_big):
-	Angle = 75
+if(is_red==False and is_big):
+	Angle = 45
 
-# How to Send the angle information to motor?
+print(Angle)
